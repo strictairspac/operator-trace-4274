@@ -7,3 +7,4 @@ class Plan(Base):
  dataset_id=Column(Integer,ForeignKey('datasets.id'),nullable=False)
  steps=Column(JSON,nullable=False)
  note=Column(String(500),nullable=False,default='')
+ content_hash=Column(String(64),nullable=True)

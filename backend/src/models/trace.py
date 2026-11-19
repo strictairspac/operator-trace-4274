@@ -10,4 +10,6 @@ class Trace(Base):
  result=Column(JSON,nullable=True)
  error=Column(String(1000),nullable=True)
  snapshot=Column(JSON,nullable=False)
+ source=Column(String(20),default='local',nullable=False)
+ import_key=Column(String(80),nullable=True)
  created_at=Column(DateTime,server_default=func.now())

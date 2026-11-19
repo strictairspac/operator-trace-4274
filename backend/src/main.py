@@ -9,11 +9,11 @@ from src.middlewares.errors import install_errors
 from src.middlewares.requests import RequestTrace
 @asynccontextmanager
 async def lifespan(app):
- if os.getenv('SEED_DEMO','true').lower()=='true':
-  try:
-   from scripts.seed_demo import seed
-   seed()
-  except Exception:logging.exception('seed failed; API remains available')
+ try:
+  from scripts.seed_demo import migrate,seed
+  migrate()
+  if os.getenv('SEED_DEMO','true').lower()=='true':seed()
+ except Exception:logging.exception('seed failed; API remains available')
  yield
 app=FastAPI(title='松原 · 分析算子执行剖面仪',lifespan=lifespan)
 app.add_middleware(RequestTrace);install_errors(app)
